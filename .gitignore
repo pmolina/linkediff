@@ -37,3 +37,10 @@ nosetests.xml
 # Own settings
 env.py
 *.db
+
+# Sublime Text
+linkediff.sublime-project
+linkediff.sublime-workspace
+
+# Virtualenv
+venv
