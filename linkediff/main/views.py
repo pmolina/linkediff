@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
+from django.contrib.auth.decorators import login_required
+from main.models import Pool
 
 def home(request):
     return render(request, 'home.html')
@@ -31,3 +33,11 @@ def register(request):
 def logout(request):
     auth_logout(request)
     return redirect('home')
+
+@login_required
+def my_pools(request):
+    user = request.user
+    all_pools = user.pool_set.all() 
+    return render(request, 'my_pools.html', locals() )
+
+  

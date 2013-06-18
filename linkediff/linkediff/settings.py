@@ -164,4 +164,6 @@ LOGGING = {
     }
 }
 
+LOGIN_URL = '/login/'
+
 from env import *

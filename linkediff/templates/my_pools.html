@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome {{ user }}, here are your pools</h1>
+
+<ul>
+{% for pool in all_pools %}
+    <li>{{ pool }}</li>
+{% endfor %}
+</ul>
+
+
+<h3>Create a new pool!</h3>
+<form action="" method="post">
+{% csrf_token %} <!-- TODO: add the csrf, and validate post -->
+    <input type="text" name="title" placeholder="Name your new pool" />
+    <input type="submit" value="ready" />
+</form>
+{% endblock %}

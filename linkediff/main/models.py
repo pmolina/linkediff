@@ -8,3 +8,4 @@ class Pool(models.Model):
 
     def __unicode__(self):
         return '"%s" created by %s' % (self.name, self.owner,)
+

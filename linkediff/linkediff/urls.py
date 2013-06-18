@@ -8,6 +8,10 @@ urlpatterns = patterns('',
     # Examples:
     url(r'^$', 'main.views.home', name='home'),
     url(r'^login/', 'main.views.login', name='login'),
+    url( r'^logout/' , 'main.views.logout' , name='logout'),
+
+    url( r'^mypools/$' , 'main.views.my_pools', name='mypools'),
+
     # url(r'^linkediff/', include('linkediff.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
