@@ -126,13 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'social_auth',
     'main',
-)
-
-AUTHENTICATION_BACKENDS = (
-    'social_auth.backends.contrib.linkedin.LinkedinBackend',
-    'django.contrib.auth.backends.ModelBackend',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -164,4 +158,8 @@ LOGGING = {
     }
 }
 
+AUTH_PROFILE_MODULE = 'main.UserProfile'
+LOGIN_URL='/login/'
+
+# Private variables here (see env.py.skeleton)
 from env import *
