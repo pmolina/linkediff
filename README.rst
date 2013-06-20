@@ -73,7 +73,7 @@ Start your Django::
 
   $ manage.py runserver
   
-..tip::
+.. tip::
   You can add `127.0.0.1 linkediff.local` to your /etc/hosts.
   
 
