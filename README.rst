@@ -16,7 +16,10 @@ Install last version of virtualenv and virtualenvwrapper::
 
 .. tip::
   Add *. virtualenvwrapper.sh* to your *.bashrc* file to make all
-  virtualenvwrapper commands available.
+  virtualenvwrapper commands available. This can be done with this simple command::
+    
+    $ echo ". virtualenvwrapper.sh" >> ~/.bashrc
+    
 
 Create a virtualenv::
 
