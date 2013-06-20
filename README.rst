@@ -76,5 +76,7 @@ Start your Django::
 .. tip::
   You can add `127.0.0.1 linkediff.local` to your /etc/hosts.
   
+You are done!
+-------------
 
 Go to your browser and try it yourself.
