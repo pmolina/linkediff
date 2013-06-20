@@ -15,7 +15,7 @@ Install last version of virtualenv and virtualenvwrapper::
   $ sudo pip install virtualenv virtualenvwrapper
 
 .. tip::
-  Add `. virtualenvwrapper.sh` to your `.bashrc` file to make all
+  Add *. virtualenvwrapper.sh* to your *.bashrc* file to make all
   virtualenvwrapper commands available.
 
 Create a virtualenv::
@@ -24,10 +24,10 @@ Create a virtualenv::
 
 .. caution::
   Virutalenvwrapper puts all environments in a directory (usually
-  `~/.virtualenvs`), which means that you have a global namespace of
+  *~/.virtualenvs*), which means that you have a global namespace of
   virtualenvs. A good practice would be to prefix the virtualenv name
   with part of the name of the project to make it unique, something
-  like `linkdenv` for linkediff.
+  like *linkdenv* for linkediff.
 
 
 Get the code
@@ -51,7 +51,7 @@ Activate and Setup requirements
 
 Activate the environment::
 
-  $ workon myenv
+  $ workon linkdenv
 
 Install requirements::
 
