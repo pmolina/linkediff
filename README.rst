@@ -41,6 +41,10 @@ Or::
   
   $ git clone https://github.com/pmolina/linkediff.git
 
+Now move to your newly created directory::
+
+  $ cd linkediff
+
 
 Activate and Setup requirements
 -------------------------------
@@ -71,7 +75,7 @@ First sync your db::
   
 Start your Django::
 
-  $ manage.py runserver
+  $ python linkediff/manage.py runserver
   
 .. tip::
   You can add `127.0.0.1 linkediff.local` to your /etc/hosts.
