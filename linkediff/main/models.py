@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import oauth2 as oauth
 import simplejson as json
 
@@ -32,6 +34,9 @@ class UserProfile(models.Model):
         url = "http://api.linkedin.com/v1/people/~:(%s)" % ','.join(fields)
         resp, content = client.request(url, "GET", headers=headers)
         return json.loads(content)
+
+    def get_user_data(self):
+        return self.get_data_from_linkedin()  # TODO: this should be persisted in the db!
 
 
 class Pool(models.Model):
