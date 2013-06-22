@@ -13,9 +13,9 @@ urlpatterns = patterns('',
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
-	url(r'^login/?$', 'main.views.oauth_login', name="oauth_login"),
-	url(r'^logout/?$', 'main.views.oauth_logout', name="oauth_logout"),
-	url(r'^login/authenticated/?$', 'main.views.oauth_authenticated', name="oauth_authenticated"),
-    url( r'^mypools/$' , 'main.views.my_pools', name='mypools'),
+    url(r'^login/?$', 'main.views.oauth_login', name="oauth_login"),
+    url(r'^logout/?$', 'main.views.oauth_logout', name="oauth_logout"),
+    url(r'^login/authenticated/?$', 'main.views.oauth_authenticated', name="oauth_authenticated"),
+    url( r'^mypools/$' , 'main.views.pools', {'all': True}, name='mypools'),
     url(r'^admin/', include(admin.site.urls)),
 )

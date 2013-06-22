@@ -60,9 +60,11 @@ def oauth_logout(request):
 
 
 @login_required
-def my_pools(request):
-    user = request.user
-    all_pools = user.pool_set.all()
+def pools(request, all=True):
+    if not all:
+        raise NotImplementedError('This is something we should think about.')
+    user_profile = request.user.userprofile_set.get()
+    pools = user_profile.pool_set.all()
     return render(request, 'my_pools.html', locals())
 
 
