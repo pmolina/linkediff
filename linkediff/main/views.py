@@ -1,13 +1,10 @@
 import oauth2 as oauth
 import cgi
 import simplejson as json
-import datetime
-import re
 
-from django.http import HttpResponse
-from django.shortcuts import render_to_response, render
-from django.http import HttpResponseRedirect
 from django.conf import settings
+from django.shortcuts import render
+from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -17,7 +14,6 @@ from main.models import UserProfile
 from main.models import Pool
 
 consumer = oauth.Consumer(settings.LINKEDIN_TOKEN, settings.LINKEDIN_SECRET)
-client = oauth.Client(consumer)
 
 request_token_url = 'https://api.linkedin.com/uas/oauth/requestToken'
 access_token_url = 'https://api.linkedin.com/uas/oauth/accessToken'
@@ -30,6 +26,7 @@ def oauth_login(request):
     else:
         current_server = "http://" + request.META['HTTP_HOST']
     oauth_callback = current_server + reverse('oauth_authenticated')
+    client = oauth.Client(consumer)
     resp, content = client.request("%s?oauth_callback=%s" %
                                    (request_token_url, oauth_callback), "GET")
     if resp['status'] != '200':
@@ -76,12 +73,7 @@ def oauth_authenticated(request):
         'id',
         'first-name',
         'last-name',
-        'skills',
-        'num-recommenders',
-        'recommendations-received',
-        'certifications',
-        'languages',
-        'courses',
+        'email-address',
     ]
     url = "http://api.linkedin.com/v1/people/~:(%s)" % ','.join(fields)
     token = oauth.Token(
@@ -95,12 +87,13 @@ def oauth_authenticated(request):
     firstname = profile['firstName']
     lastname = profile['lastName']
     identifier = profile['id']
+    email = profile['emailAddress']
     try:
         user = User.objects.get(username=identifier)
     except User.DoesNotExist:
         user = User.objects.create_user(
             identifier,
-            '%s@linkedin.com' % identifier,
+            email,
             access_token['oauth_token_secret']
         )
         user.first_name = firstname
