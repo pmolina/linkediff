@@ -78,7 +78,7 @@ def oauth_authenticated(request):
     client = oauth.Client(consumer, token)
     resp, content = client.request(access_token_url, "GET")
     if resp['status'] != '200':
-        raise Exception("Invalid response from provider.")
+        raise Exception("Invalid response from LinkedIn.")
     access_token = dict(cgi.parse_qsl(content))
     headers = {'x-li-format': 'json'}
     fields = [
