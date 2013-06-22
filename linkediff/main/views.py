@@ -81,7 +81,18 @@ def oauth_authenticated(request):
         raise Exception("Invalid response from provider.")
     access_token = dict(cgi.parse_qsl(content))
     headers = {'x-li-format': 'json'}
-    url = "http://api.linkedin.com/v1/people/~:(id,first-name,last-name)"
+    fields = [
+        'id',
+        'first-name',
+        'last-name',
+        'skills',
+        'num-recommenders',
+        'recommendations-received',
+        'certifications',
+        'languages',
+        'courses',
+    ]
+    url = "http://api.linkedin.com/v1/people/~:(%s)" % ','.join(fields)
     token = oauth.Token(
         access_token['oauth_token'],
         access_token['oauth_token_secret']
