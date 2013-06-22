@@ -38,6 +38,7 @@ class Pool(models.Model):
     owner = models.ForeignKey(UserProfile, db_index=True)
     name = models.CharField(max_length=200)
     created = models.DateTimeField(auto_now_add=True)
+    members = models.ManyToManyField(UserProfile, related_name='pools')
 
     def __unicode__(self):
         return '"%s" created by %s' % (self.name, self.owner,)
