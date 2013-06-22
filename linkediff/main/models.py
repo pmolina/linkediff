@@ -6,6 +6,9 @@ class UserProfile(models.Model):
     oauth_token = models.CharField(max_length=200)
     oauth_secret = models.CharField(max_length=200)
 
+    def __unicode__(self):
+    	return '%s' % self.user
+
 
 class Pool(models.Model):
     owner = models.ForeignKey(UserProfile, db_index=True)
