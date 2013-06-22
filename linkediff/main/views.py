@@ -42,15 +42,6 @@ def oauth_login(request):
 
 def home(request):
     return render(request, 'home.html')
-    html = "<html><body>"
-    token = oauth.Token(request.user.get_profile().oauth_token,
-                        request.user.get_profile().oauth_secret)
-    client = oauth.Client(consumer, token)
-    headers = {'x-li-format': 'json'}
-    url = "http://api.linkedin.com/v1/people/~:(id,first-name,last-name,headline)"
-    resp, content = client.request(url, "GET", headers=headers)
-    profile = json.loads(content)
-    return HttpResponse(html)
 
 
 @login_required
