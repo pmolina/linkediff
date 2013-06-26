@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     user = models.ForeignKey(User)
     oauth_token = models.CharField(max_length=200)
     oauth_secret = models.CharField(max_length=200)
+    modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return '%s' % self.user
@@ -38,6 +39,25 @@ class UserProfile(models.Model):
     def get_user_data(self):
         return self.get_data_from_linkedin()  # TODO: this should be persisted in the db!
 
+    def save_linkedin_data(self):
+        """ Persists the data from get_user_data() """
+        data = self.get_user_data()
+        skills = data['skills']
+        self.update_skills(skills)
+
+    def update_skills(self, skills):
+        skill_values = skills['values']
+        my_skill_names = map( lambda x: x['skill']['name'], skill_values)
+        #Look for these skills that already are in the db
+        known_skills = Skill.objects.filter(description__in=my_skill_names)
+        self.skill_set.add(*known_skills)
+        #Those that are new have to be first added and then assigned
+        new_skills = set(my_skill_names) - set(known_skills)
+        new_object_skills = map(lambda x: Skill(description=x), new_skills)
+        for sk in new_object_skills:
+            sk.save()
+        self.skill_set.add(*new_object_skills)
+
 
 class Pool(models.Model):
     owner = models.ForeignKey(UserProfile, db_index=True)
@@ -47,3 +67,11 @@ class Pool(models.Model):
 
     def __unicode__(self):
         return '"%s" created by %s' % (self.name, self.owner,)
+
+
+class Skill(models.Model):
+    description = models.CharField(max_length=200)
+    user = models.ManyToManyField(UserProfile)
+
+    def __unicode__(self):
+        return r'%s' % self.description
