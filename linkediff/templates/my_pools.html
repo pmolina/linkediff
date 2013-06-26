@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome {{ user }}, here are your pools</h1>
+<h1>Welcome {{ user.first_name }} {{ user.last_name }}, here are your pools</h1>
 
 <ul>
 {% for pool in all_pools %}
